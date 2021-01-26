@@ -4,6 +4,7 @@ import com.llc.financas.model.entity.Lancamento;
 import com.llc.financas.model.enums.StatusLancamento;
 
 import java.util.List;
+import java.util.Optional;
 
 public interface LancamentoService {
 
@@ -18,5 +19,7 @@ public interface LancamentoService {
     void atualizarStatus(Lancamento lancamento, StatusLancamento statusLancamento);
 
     void validarLancamento(Lancamento lancamento);
+
+    Optional<Lancamento> obterPorId(Long id);
 
 }
