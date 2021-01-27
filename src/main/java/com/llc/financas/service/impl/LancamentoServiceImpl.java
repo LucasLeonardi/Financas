@@ -3,6 +3,7 @@ package com.llc.financas.service.impl;
 import com.llc.financas.exception.RegraNegocioException;
 import com.llc.financas.model.entity.Lancamento;
 import com.llc.financas.model.enums.StatusLancamento;
+import com.llc.financas.model.enums.TipoLancamento;
 import com.llc.financas.model.repository.LancamentoRepository;
 import com.llc.financas.service.LancamentoService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,7 +33,7 @@ public class LancamentoServiceImpl implements LancamentoService {
     }
 
     @Override
-    @Transactional(readOnly = true)
+    @Transactional
     public Lancamento atualizarLancamento(Lancamento lancamento) {
         Objects.requireNonNull(lancamento.getId());
         validarLancamento(lancamento);
@@ -94,6 +95,21 @@ public class LancamentoServiceImpl implements LancamentoService {
     public Optional<Lancamento> obterPorId(Long id) {
         Optional<Lancamento> lancamento = lancamentoRepository.findById(id);
         return lancamento;
+    }
+
+    @Override
+    public BigDecimal obterSaldoDoUsuario(Long id) {
+        BigDecimal receita = lancamentoRepository.obterSaldoPorTipoDeLancamentoEUsuario(id, TipoLancamento.RECEITA);
+        BigDecimal despesa = lancamentoRepository.obterSaldoPorTipoDeLancamentoEUsuario(id, TipoLancamento.DESPESA);
+
+        if (receita == null){
+            receita = BigDecimal.ZERO;
+        }
+        if (despesa == null){
+            despesa = BigDecimal.ZERO;
+        }
+
+        return receita.subtract(despesa);
     }
 
 

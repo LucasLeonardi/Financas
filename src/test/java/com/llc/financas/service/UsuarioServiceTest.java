@@ -6,7 +6,6 @@ import com.llc.financas.model.entity.Usuario;
 import com.llc.financas.model.repository.UsuarioRepository;
 import com.llc.financas.service.impl.UsuarioServiceImpl;
 import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mockito;

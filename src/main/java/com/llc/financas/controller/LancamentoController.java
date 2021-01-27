@@ -1,6 +1,7 @@
 package com.llc.financas.controller;
 
 import com.llc.financas.DTO.LancamentoDTO;
+import com.llc.financas.DTO.LancamentoStatusDTO;
 import com.llc.financas.exception.RegraNegocioException;
 import com.llc.financas.model.entity.Lancamento;
 import com.llc.financas.model.entity.Usuario;
@@ -51,6 +52,29 @@ public class LancamentoController {
             }
         }).orElseGet(() ->
                  new ResponseEntity("Lancamento nao encontrado", HttpStatus.BAD_REQUEST));
+    }
+
+
+    @PutMapping("{id}/statusAtualizado")
+    public ResponseEntity atualizarStatus(@PathVariable("id") Long id, @RequestBody LancamentoStatusDTO statusLancamento){
+        Optional<Lancamento> lancamento = lancamentoService.obterPorId(id);
+        StatusLancamento statusLancamento1 = StatusLancamento.valueOf(statusLancamento.getStatus());
+        if (statusLancamento1 == null){
+            return ResponseEntity.badRequest().body("Não foi possivel atualizar o Status");
+        }
+        if(lancamento.isPresent()){
+            try {
+                Lancamento lancamentoAtualizado = lancamento.get();
+                lancamentoAtualizado.setStatus(statusLancamento1);
+                Lancamento lancamentoSalvo = lancamentoService.atualizarLancamento(lancamentoAtualizado);
+                return ResponseEntity.ok(lancamentoSalvo);
+            }catch (RegraNegocioException e){
+                return ResponseEntity.badRequest().body(e.getMessage());
+            }
+
+        }else {
+            return new ResponseEntity("Lancamento nao encontrado", HttpStatus.BAD_REQUEST);
+        }
     }
 
     @GetMapping
