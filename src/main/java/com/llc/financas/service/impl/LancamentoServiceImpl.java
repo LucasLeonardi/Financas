@@ -58,6 +58,7 @@ public class LancamentoServiceImpl implements LancamentoService {
     }
 
     @Override
+    @Transactional
     public void atualizarStatus(Lancamento lancamento, StatusLancamento statusLancamento) {
         Objects.requireNonNull(lancamento.getId());
         lancamento.setStatus(statusLancamento);

@@ -2,7 +2,10 @@ package com.llc.financas.model.entity;
 
 import com.llc.financas.model.enums.StatusLancamento;
 import com.llc.financas.model.enums.TipoLancamento;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import org.springframework.data.jpa.convert.threeten.Jsr310JpaConverters;
 
 import javax.persistence.*;
@@ -11,6 +14,9 @@ import java.time.LocalDate;
 
 @Entity
 @Data
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
 @Table(name = "lancamento", schema = "financeiro")
 public class Lancamento {
 
