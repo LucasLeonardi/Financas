@@ -31,13 +31,13 @@ public class UsuarioRepositoryTest {
     public void verificarSeExisteUmEmail(){
         Usuario usuario = criarUsuario();
         testEntityManager.persist(usuario);
-        boolean result = usuarioRepository.existsByEmail("Usuario@email.com");
+        boolean result = usuarioRepository.existsByEmail("usuario@email.com");
         Assertions.assertTrue(result);
     }
 
     @Test
     public void retornaFalsoQuandoNaoHouverUsuarioCadastradoComEmail(){
-        boolean result = usuarioRepository.existsByEmail("Usuario@email.com");
+        boolean result = usuarioRepository.existsByEmail("usuario@email.com");
         Assertions.assertFalse(result);
     }
 

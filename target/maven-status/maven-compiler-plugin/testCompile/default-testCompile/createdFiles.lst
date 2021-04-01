@@ -1,0 +1,5 @@
+com\llc\financas\model\repository\UsuarioRepositoryTest.class
+com\llc\financas\service\UsuarioServiceTest.class
+com\llc\financas\service\LancamentoServiceTest.class
+com\llc\financas\FinancasApplicationTests.class
+com\llc\financas\model\repository\LancamentoRepositoryTest.class
