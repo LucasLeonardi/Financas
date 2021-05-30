@@ -134,7 +134,8 @@ public class LancamentoController {
         lancamento.setMes(lancamentoDTO.getMes());
         lancamento.setValor(lancamentoDTO.getValor());
 
-        Usuario usuario = usuarioService.obterUsuario(lancamentoDTO.getUsuario()).orElseThrow(() -> new RegraNegocioException("Usuario não encontrado"));
+        Usuario usuario = usuarioService.obterUsuario(lancamentoDTO.getUsuario()).orElseThrow(
+                () -> new RegraNegocioException("Usuario não encontrado"));
 
         lancamento.setUsuario(usuario);
 
